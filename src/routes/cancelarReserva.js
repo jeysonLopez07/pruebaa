@@ -17,14 +17,18 @@ var corsOptions={
 }
 
 
-router.put("/verComentario",cors(corsOptions),(req,res)=>{
-    const {codigoSC}=req.body
 
-    mysqlConecction.query("select comentario from comentario_solicitud where id_Solicitud=?;",codigoSC,(err,rows,fields)=>{
+router.put("/cancelarReserva",cors(corsOptions),(req,res)=>{
+   const {id}=req.body
+   let respuesta=[]
+    mysqlConecction.query("update solicitud_reserva set confirmacion='Cancelada' where id_Solicitud=?",id,(err,rows,fields)=>{
         if(!err){
-            res.json(rows)
+            respuesta="Cancelado"
+            res.json(respuesta);
         }else{
+            respuesta="Nocancelado"
             console.log(err);
+            res.json(respuesta);
         }
     });
     

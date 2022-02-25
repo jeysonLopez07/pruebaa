@@ -1,10 +1,10 @@
 const mysql =require('mysql');
 
 const mysqlConecction=mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password: 'PasswordRoot07',
-    database:'reserva'
+    host:'database-reserva.cgry4nstxexo.us-east-1.rds.amazonaws.com',
+    user:'admin',
+    password: 'Qwebnmrty07',
+    database:'Reserva'
 });
 
 mysqlConecction.connect(function(err){

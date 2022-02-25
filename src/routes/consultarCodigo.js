@@ -16,13 +16,19 @@ var corsOptions={
     }
 }
 
-
-router.put("/verComentario",cors(corsOptions),(req,res)=>{
-    const {codigoSC}=req.body
-
-    mysqlConecction.query("select comentario from comentario_solicitud where id_Solicitud=?;",codigoSC,(err,rows,fields)=>{
+router.put("/consultarCodigo",cors(corsOptions),(req,res)=>{
+   const {institucion,codigo}=req.body
+   const values=[institucion,codigo]
+    mysqlConecction.query("select * from consultaCodigo where nombre_Institucion=? and Codigo=?",values,(err,rows,fields)=>{
         if(!err){
-            res.json(rows)
+            let mensaje=[]
+            if(rows.length===0){
+                mensaje=["Incorrecto"]
+                res.json(mensaje);
+            }else{
+                mensaje=["Correcto"]
+                res.json(mensaje);
+            }
         }else{
             console.log(err);
         }

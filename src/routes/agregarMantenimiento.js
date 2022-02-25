@@ -16,15 +16,19 @@ var corsOptions={
     }
 }
 
-
-router.put("/verComentario",cors(corsOptions),(req,res)=>{
-    const {codigoSC}=req.body
-
-    mysqlConecction.query("select comentario from comentario_solicitud where id_Solicitud=?;",codigoSC,(err,rows,fields)=>{
+router.put("/agregarMantenimiento",cors(corsOptions),(req,res)=>{
+   const {nombre,correo}=req.body
+    values=[nombre,correo]
+    let respuesta=[]
+    mysqlConecction.query("insert into correoMantenimiento(nombre_Correo,corre) values(?,?)",values,(err,rows,fields)=>{
         if(!err){
-            res.json(rows)
+            respuesta=["Agregado"]
+            res.json(respuesta);
+
         }else{
             console.log(err);
+            respuesta=["Noagregado"]
+            res.json(respuesta);
         }
     });
     

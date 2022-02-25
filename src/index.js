@@ -1,15 +1,16 @@
 const express = require("express");
 const app=express();
 const cors = require('cors');
+const req = require("express/lib/request");
 
 app.use(cors())
 //setting
 app.set('port',process.env.PORT || 3006)
 
+
 //middlewares
 app.use(express.json());
 
-//Route
 app.use(require('./routes/salas'));
 app.use(require('./routes/agregar'));
 app.use(require('./routes/agregar2'));
@@ -38,6 +39,18 @@ app.use(require('./routes/consultarSala'));
 app.use(require('./routes/agregarInfoUsuario'));
 app.use(require('./routes/visitasDC'));
 app.use(require('./routes/disponibilidad'));
+app.use(require('./routes/usuarios'));
+app.use(require('./routes/editar'));
+app.use(require('./routes/editarContra'));
+app.use(require('./routes/consultarCodigo'));
+app.use(require('./routes/confirmacion'));
+app.use(require('./routes/roles'));
+app.use(require('./routes/actualizarRol'));
+app.use(require('./routes/mantenimiento'));
+app.use(require('./routes/agregarMantenimiento'));
+app.use(require('./routes/eliminarMantenimiento'));
+app.use(require('./routes/reservasAceptadas'));
+app.use(require('./routes/cancelarReserva'));
 
 
 //Starting the server

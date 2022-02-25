@@ -1,11 +1,23 @@
 const express = require("express")
 const router=express.Router();
-
-
 const mysqlConecction=require('../database');
+require('dotenv').config({path:"src/.env"})
+const frontend=process.env.FRONTEND;
+const cors = require('cors');
+var whiteList=[`${frontend}`]
+
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
 
-router.post("/agregar",(req)=>{
+router.post("/agregar",cors(corsOptions),(req)=>{
     const {dia,inicio,fin,estado,codigo,correo_Electronico,motivoV}=req.body
    console.log("Entra a esta prueba y el correo es:"+correo_Electronico)
     mysqlConecction.query("select id_Usuario from usuario where correo_Electronico=?",correo_Electronico,(err,rows,fields)=>{
@@ -15,10 +27,10 @@ router.post("/agregar",(req)=>{
             var id_usuario2=id_usuario.id_Usuario
             console.log(id_usuario2)
             const values= [dia,inicio,fin,estado,codigo,id_usuario2]
-            mysqlConecction.query("INSERT INTO solicitud_Reserva(dia,hora_inicio,hora_Fin,confirmacion,id_Sala,id_Usuario) values(?,?,?,?,?,?)",values,(err,rows,fields)=>{
+            mysqlConecction.query("INSERT INTO solicitud_reserva(dia,hora_inicio,hora_Fin,confirmacion,id_Sala,id_Usuario) values(?,?,?,?,?,?)",values,(err,rows,fields)=>{
                 if(!err){
                     if(codigo==20 || codigo==21 || codigo==22 ||codigo==23){
-                        mysqlConecction.query("select id_Solicitud from solicitud_Reserva order by id_Solicitud desc limit 1",values,(err,rows,fields)=>{
+                        mysqlConecction.query("select id_Solicitud from solicitud_reserva order by id_Solicitud desc limit 1",values,(err,rows,fields)=>{
                             if(!err){
                                var ultima=rows[0]
                                console.log(ultima.id_Solicitud);

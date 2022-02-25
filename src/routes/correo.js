@@ -3,17 +3,31 @@ const { send, jsonp } = require("express/lib/response");
 const res = require("express/lib/response");
 const router=express.Router();
 const nodemailer = require("nodemailer");
-
 const mysqlConecction=require('../database');
+require('dotenv').config({path:"src/.env"})
+const frontend=process.env.FRONTEND;
+const cors = require('cors');
+var whiteList=[`${frontend}`]
+            
 
-router.post("/correo",(req,res)=>{
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+
+router.post("/correo",cors(corsOptions),(req,res)=>{
  
   const {edificio,nombre,dia,inicio,fin,correo_Electronico}=req.body
-  
+  console.log(edificio);
   let correoAdmin="";
   if (edificio === "Torre1") {
     correoAdmin = "Administrador Torre 1";
-  } else if (edificio === "Torre2") {
+  } else if (edificio === "Torre 2") {
     correoAdmin = "Administrador Torre 2";
   } else if (edificio === "CBB") {
     correoAdmin = "Administrador CBB";
@@ -21,13 +35,22 @@ router.post("/correo",(req,res)=>{
     correoAdmin = "Administrador CBC";
   } else if (edificio === "Data Center") {
     correoAdmin = "Administrador DataCenter";
-  } else if (edificio === "Plaza") {
-    correoAdmin = "Administrador Plazas";
+  } else if (edificio === "Torre 2" && nombre==="Zona de Descarga") {
+    correoAdmin = "Administrador ZonaDescarga";
+  }
+    else if (edificio === "Plaza") {
+      correoAdmin = "Administrador Plazas";
   }
   mysqlConecction.query("select correo_Electronico from administrador where nombre_Rol=?",correoAdmin,(err,rows,fields)=>{
       if(!err){
+
         let CorreoEnviar=[]
-        CorreoEnviar=rows[0].correo_Electronico;
+
+        for(let i=0;i<rows.length;i++){
+          CorreoEnviar.push(rows[i].correo_Electronico)
+        }
+
+        
         console.log(CorreoEnviar)
         let transporte = nodemailer.createTransport({
           host: "smtp.gmail.com",

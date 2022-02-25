@@ -17,12 +17,10 @@ var corsOptions={
 }
 
 
-router.put("/verComentario",cors(corsOptions),(req,res)=>{
-    const {codigoSC}=req.body
-
-    mysqlConecction.query("select comentario from comentario_solicitud where id_Solicitud=?;",codigoSC,(err,rows,fields)=>{
+router.get("/roles",cors(corsOptions),(req,res)=>{
+    mysqlConecction.query("select nombre_Rol from roles ",(err,rows,fields)=>{
         if(!err){
-            res.json(rows)
+            res.json(rows);
         }else{
             console.log(err);
         }

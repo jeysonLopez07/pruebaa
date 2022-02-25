@@ -1,15 +1,26 @@
 const express = require("express")
 const router=express.Router();
-
-
 const mysqlConecction=require('../database');
+require('dotenv').config({path:"src/.env"})
+const frontend=process.env.FRONTEND;
+const cors = require('cors');
+var whiteList=[`${frontend}`]
 
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
-router.put("/consultarVisitas",(req,res)=>{
-    const {id,id_Solicitudesd}=req.body
-    const values=[id,id_Solicitudesd]
+router.put("/consultarVisitas",cors(corsOptions),(req,res)=>{
+    const {id_Solicitudesd}=req.body
+    const values=[id_Solicitudesd]
     console.log(id_Solicitudesd);
-    mysqlConecction.query("SELECT * FROM mostrarVisitas WHERE id_Solicitud=?",id_Solicitudesd,(err,rows,fields)=>{
+    mysqlConecction.query("SELECT * FROM mostrarvisitas WHERE id_Solicitud=?",id_Solicitudesd,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
