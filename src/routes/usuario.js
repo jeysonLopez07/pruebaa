@@ -18,7 +18,7 @@ var corsOptions={
 }
 
 
-router.put("/usuario",(req,res)=>{
+router.put("/usuario",cors(corsOptions),(req,res)=>{
     const {correo_Electronico,contraseña}=req.body
     const values=[correo_Electronico,contraseña]
     console.log("Corre: "+correo_Electronico +"contraseña:"+contraseña)
