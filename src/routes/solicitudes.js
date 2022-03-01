@@ -71,7 +71,7 @@ router.put("/solicitudes",cors(corsOptions),(req,res)=>{
     }
 
     else if(rol==="Administrador CBC"){
-        mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Plaza'",(err,rows,fields)=>{
+        mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='CBC'",(err,rows,fields)=>{
             if(!err){
                 res.json(rows);
             }else{
