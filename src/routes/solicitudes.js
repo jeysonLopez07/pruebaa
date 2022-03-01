@@ -35,7 +35,7 @@ router.put("/solicitudes",cors(corsOptions),(req,res)=>{
                      }
                  });
              }else if(rol==="Administrador Torre 1"){
-                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Torre 1'",(err,rows,fields)=>{
+                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Torre 1' ORDER BY id_Solicitud ASC",(err,rows,fields)=>{
                      if(!err){
                          res.json(rows);
                      }else{
@@ -43,7 +43,7 @@ router.put("/solicitudes",cors(corsOptions),(req,res)=>{
                      }
                  });
              }else if(rol==="Administrador Torre 2"){
-                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Torre 2'",(err,rows,fields)=>{
+                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Torre 2' ORDER BY id_Solicitud ASC",(err,rows,fields)=>{
                      if(!err){
                          res.json(rows);
                      }else{
@@ -51,7 +51,7 @@ router.put("/solicitudes",cors(corsOptions),(req,res)=>{
                      }
                  });
              }else if(rol==="Administrador CBB"){
-                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='CBB'",(err,rows,fields)=>{
+                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='CBB' ORDER BY id_Solicitud ASC",(err,rows,fields)=>{
                      if(!err){
                          res.json(rows);
                      }else{
@@ -59,7 +59,7 @@ router.put("/solicitudes",cors(corsOptions),(req,res)=>{
                      }
                  });
              }else if(rol==="Administrador ZonaDescarga"){
-                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Torre 2' and nombre_Sala='Zona de Descarga' ",(err,rows,fields)=>{
+                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Torre 2' and nombre_Sala='Zona de Descarga' ORDER BY id_Solicitud ASC ",(err,rows,fields)=>{
                      if(!err){
                          res.json(rows);
                      }else{
@@ -67,7 +67,7 @@ router.put("/solicitudes",cors(corsOptions),(req,res)=>{
                      }
                  });
              }else if(rol==="Administrador Plazas"){
-                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Plaza'",(err,rows,fields)=>{
+                 mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Plaza' ORDER BY id_Solicitud ASC",(err,rows,fields)=>{
                      if(!err){
                          res.json(rows);
                      }else{
