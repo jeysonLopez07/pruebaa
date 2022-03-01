@@ -21,7 +21,7 @@ router.put("/consultarData",cors(corsOptions),(req,res)=>{
     const {correo_Electronico}=req.body
     const values=[correo_Electronico]
     console.log(correo_Electronico);
-    mysqlConecction.query("SELECT * FROM versolicitudes where Edificio='Data Center' and confirmacion='Aceptada'",values,(err,rows,fields)=>{
+    mysqlConecction.query("SELECT * FROM versolicitudes where Edificio='Data Center' and confirmacion='Aceptada' and correo_Electronico=?",values,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
