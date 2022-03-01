@@ -112,7 +112,7 @@ router.delete("/confirmar",cors(corsOptions),(req,res)=>{
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>${edificio}</td><td>${nombre}</td><td>${dia}</td><td>${inicio}</td><td>${fin}</td>
+                                        <td>${edificio}</td><td>${nombre}</td><td>${dia.substring(0,10)}</td><td>${inicio}</td><td>${fin}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -135,7 +135,7 @@ router.delete("/confirmar",cors(corsOptions),(req,res)=>{
                     
                     var numero=fin[0]+fin[1]
                     var fechaNueva=dia[0]+dia[1]+dia[2]+dia[3]+dia[4]+dia[5]+dia[6]+dia[7]+dia[8]+dia[9]
-                    const dias = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+                    const dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
                     console.log(fechaNueva)
                     var numeroDia=new Date(fechaNueva).getDay()
                     console.log(numeroDia)
