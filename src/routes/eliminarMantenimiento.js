@@ -22,7 +22,7 @@ router.put("/eliminarMantenimiento",cors(corsOptions),(req,res)=>{
     let respuesta=[]
 
 
-    mysqlConecction.query("select id_correoMantenimiento from correomantenimiento where corre=?",correoSelect,(err,rows,fields)=>{
+    mysqlConecction.query("select id_correomantenimiento from correomantenimiento where corre=?",correoSelect,(err,rows,fields)=>{
         if(!err){
             const codigo=rows[0].id_correoMantenimiento
             mysqlConecction.query("delete from correomantenimiento where id_correoMantenimiento=?",codigo,(err,rows,fields)=>{

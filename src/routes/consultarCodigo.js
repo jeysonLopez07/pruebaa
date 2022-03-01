@@ -19,7 +19,7 @@ var corsOptions={
 router.put("/consultarCodigo",cors(corsOptions),(req,res)=>{
    const {institucion,codigo}=req.body
    const values=[institucion,codigo]
-    mysqlConecction.query("select * from consultaCodigo where nombre_Institucion=? and Codigo=?",values,(err,rows,fields)=>{
+    mysqlConecction.query("select * from consultacodigo where nombre_Institucion=? and Codigo=?",values,(err,rows,fields)=>{
         if(!err){
             let mensaje=[]
             if(rows.length===0){

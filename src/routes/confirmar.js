@@ -145,7 +145,7 @@ router.delete("/confirmar",cors(corsOptions),(req,res)=>{
                     
                         let mantenimiento=[]
 
-                        mysqlConecction.query("select corre from correoMantenimiento",(err,rows,fields)=>{
+                        mysqlConecction.query("select corre from correomantenimiento",(err,rows,fields)=>{
                             if(!err){
                                 for(let i=0;i<rows.length;i++){
                                     mantenimiento.push(rows[i].corre)

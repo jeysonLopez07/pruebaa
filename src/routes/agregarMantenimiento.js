@@ -20,7 +20,7 @@ router.put("/agregarMantenimiento",cors(corsOptions),(req,res)=>{
    const {nombre,correo}=req.body
     values=[nombre,correo]
     let respuesta=[]
-    mysqlConecction.query("insert into correoMantenimiento(nombre_Correo,corre) values(?,?)",values,(err,rows,fields)=>{
+    mysqlConecction.query("insert into correomantenimiento(nombre_Correo,corre) values(?,?)",values,(err,rows,fields)=>{
         if(!err){
             respuesta=["Agregado"]
             res.json(respuesta);
