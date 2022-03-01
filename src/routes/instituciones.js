@@ -19,7 +19,7 @@ var corsOptions={
 
 router.put("/instituciones",cors(corsOptions),(req,res)=>{
     const {nombre}=req.body
-    mysqlConecction.query("select nombre_Institucion from instituciones_Edificios where nombre_Edificio=?;",nombre,(err,rows,fields)=>{
+    mysqlConecction.query("select nombre_Institucion from instituciones_edificios where nombre_Edificio=?;",nombre,(err,rows,fields)=>{
         if(!err){
             res.json(rows);
         }else{
