@@ -69,7 +69,7 @@ router.delete("/cancelar",cors(corsOptions),(req,res)=>{
                 subject: "Solicitud Reserva de Salas ✔", // Subject line
                 html:"<h4>Su Solicitud de Reserva de Sala fue Cancelada</h4>"+
                       "<table border="+"1"+"><tr class="+"background-color:lightblue"+"><th>Edificio</th><th>Nombre de Sala</th><th>Día de reserva</th><th>Hora de Inicio</th><th>Hora de Finalización</th></tr>"+
-                      "<tr><td>"+edificio+"</td><td>"+nombre+"</td><td>"+dia+"</td><td>"+inicio+"</td><td>"+fin+"</td></tr></table>" 
+                      "<tr><td>"+edificio+"</td><td>"+nombre+"</td><td>"+dia.substring(0,10)+"</td><td>"+inicio+"</td><td>"+fin+"</td></tr></table>" 
               }
 
               transporte.sendMail(mailOption,(error,info)=>{

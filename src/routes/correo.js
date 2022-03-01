@@ -70,7 +70,7 @@ router.post("/correo",cors(corsOptions),(req,res)=>{
           subject: "Solicitud Reserva de Salas ✔", // Subject line
           html:"<h4>Se Creó una Solicitud de Reserva de Sala</h4>"+
                 "<table border="+"1"+"><tr class="+"background-color:lightblue"+"><th>Edificio</th><th>Nombre de Sala</th><th>Día de reserva</th><th>Hora de Inicio</th><th>Hora de Finalización</th></tr>"+
-                "<tr><td>"+edificio+"</td><td>"+nombre+"</td><td>"+dia+"</td><td>"+inicio+"</td><td>"+fin+"</td></tr></table>" 
+                "<tr><td>"+edificio+"</td><td>"+nombre+"</td><td>"+dia.substring(0,10)+"</td><td>"+inicio+"</td><td>"+fin+"</td></tr></table>" 
         /*"<h4>Se creó una solicitud de reserva<h4>"+
           "<p>En el Edificio: "+edificio+"<p>"+
           "<p>En la sala con Nombre: "+nombre+"<p>"+

@@ -108,7 +108,7 @@ router.post("/agregar2",cors(corsOptions),(req)=>{
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>${Edificio}</td><td>${nombre_S}</td><td>${dia}</td><td>${inicio}</td><td>${fin}</td>
+                                                    <td>${Edificio}</td><td>${nombre_S}</td><td>${dia.substring(0,10)}</td><td>${inicio}</td><td>${fin}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
