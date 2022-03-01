@@ -205,7 +205,7 @@ router.delete("/confirmar",cors(corsOptions),(req,res)=>{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>${edificio}</td><td>${nombre}</td><td>${dia}</td><td>${inicio}</td><td>${fin}</td>
+                                            <td>${edificio}</td><td>${nombre}</td><td>${dia.substring(0,10)}</td><td>${inicio}</td><td>${fin}</td>
                                         </tr>
                                     </tbody>
                                 </table>
