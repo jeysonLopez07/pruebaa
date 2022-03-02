@@ -6,20 +6,8 @@ const nodemailer = require("nodemailer");
 const mysqlConecction=require('../database');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
-const cors = require('cors');
-var whiteList=[`${frontend}`]
 
-var corsOptions={
-    origin: function(origin,callback){
-        if(whiteList.indexOf(origin)!==-1){
-            callback(null,true);
-        }else{
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
-
-router.delete("/confirmar",cors(corsOptions),(req,res)=>{
+router.delete("/confirmar",(req,res)=>{
     const {confirmar,id,edificio,nombre,dia,inicio,fin,comentario,correo_Electronico}=req.body
     const values=[confirmar,id,edificio,nombre,dia,inicio,fin]
     const values2=[id,comentario]

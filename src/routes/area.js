@@ -3,22 +3,9 @@ const router=express.Router();
 const mysqlConecction=require('../database');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
-const cors = require('cors');
-var whiteList=[`${frontend}`]
-
-var corsOptions={
-    origin: function(origin,callback){
-        if(whiteList.indexOf(origin)!==-1){
-            callback(null,true);
-        }else{
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
 
 
-
-router.get("/area",cors(corsOptions),(req,res)=>{
+router.get("/area",(req,res)=>{
    
     mysqlConecction.query("select nombre_Are from areas_trabajo",(err,rows,fields)=>{
         if(!err){

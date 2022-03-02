@@ -3,22 +3,9 @@ const router=express.Router();
 const mysqlConecction=require('../database');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
-const cors = require('cors');
-
-var whiteList=[`${frontend}`]
-
-var corsOptions={
-    origin: function(origin,callback){
-        if(whiteList.indexOf(origin)!==-1){
-            callback(null,true);
-        }else{
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
 
 
-router.put("/editar",cors(corsOptions),(req,res)=>{
+router.put("/editar",(req,res)=>{
     const {nombre,apellido,nombreUsuario,correo,telefono,edificio,narea,nombre_Institucion}=req.body
     let enviar=[]
     mysqlConecction.query("select id_Usuario from usuario where correo_Electronico=?",correo,(err,rows,fields)=>{
