@@ -15,9 +15,21 @@ const frontend=process.env.FRONTEND;
 const cors = require('cors');
 const { required } = require("nodemon/lib/config");
 const { path } = require('express/lib/application');
+var whiteList=[`${frontend}`]
+            
+
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
 
-router.post("/confirmacion",(req,res)=>{
+router.post("/confirmacion",cors(corsOptions),(req,res)=>{
     const {nombre,apellido,nombreUsuario,correo}=req.body
     
     const url="http://localhost:3000/"

@@ -3,9 +3,20 @@ const router=express.Router();
 const mysqlConecction=require('../database');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
+const cors = require('cors');
+var whiteList=[`${frontend}`]
 
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
-router.put("/consultarVisitas",(req,res)=>{
+router.put("/consultarVisitas",cors(corsOptions),(req,res)=>{
     const {id_Solicitudesd}=req.body
     const values=[id_Solicitudesd]
     console.log(id_Solicitudesd);

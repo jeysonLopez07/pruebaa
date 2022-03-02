@@ -7,8 +7,19 @@ const mysqlConecction=require('../database');
 const cors = require('cors');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
+var whiteList=[`${frontend}`]
+            
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
-router.post("/agregar2",(req)=>{
+router.post("/agregar2",cors(corsOptions),(req)=>{
     console.log("Si entra en agregar2")
     const {Edificio,nombre_S,dia,inicio,fin,usuario,mensaje,motivo,estado}=req.body
     const values= [Edificio,nombre_S]

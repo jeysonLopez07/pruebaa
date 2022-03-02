@@ -4,11 +4,21 @@ const bcrypt = require('bcrypt');
 const mysqlConecction=require('../database');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
+const cors = require('cors');
+var whiteList=[`${frontend}`]
+
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
 
-
-
-router.put("/usuario",(req,res)=>{
+router.put("/usuario",cors(corsOptions),(req,res)=>{
     const {correo_Electronico,contraseña}=req.body
     const values=[correo_Electronico,contraseña]
     console.log("Corre: "+correo_Electronico +"contraseña:"+contraseña)

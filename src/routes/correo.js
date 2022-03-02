@@ -6,9 +6,21 @@ const nodemailer = require("nodemailer");
 const mysqlConecction=require('../database');
 require('dotenv').config({path:"src/.env"})
 const frontend=process.env.FRONTEND;
+const cors = require('cors');
+var whiteList=[`${frontend}`]
+            
 
+var corsOptions={
+    origin: function(origin,callback){
+        if(whiteList.indexOf(origin)!==-1){
+            callback(null,true);
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
-router.post("/correo",(req,res)=>{
+router.post("/correo",cors(corsOptions),(req,res)=>{
  
   const {edificio,nombre,dia,inicio,fin,correo_Electronico}=req.body
   console.log(edificio);
