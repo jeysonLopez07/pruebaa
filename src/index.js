@@ -5,7 +5,7 @@ const req = require("express/lib/request");
 
 app.use(cors())
 //setting
-app.set('port',process.env.PORT || 3006)
+app.set('port',process.env.PORT || 3306)
 
 
 //middlewares
