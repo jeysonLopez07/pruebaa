@@ -20,11 +20,13 @@ var corsOptions={
 router.put("/solicitudes",cors(corsOptions),(req,res)=>{
     const {correorol}=req.body;
     let rol=""
+    console.log(correorol)
 
     mysqlConecction.query("SELECT nombre_Rol FROM VistaRoles where correo_Electronico=?",correorol,(err,rows,fields)=>{
         if(!err){
             console.log(rows[0].nombre_Rol)
              rol=rows[0].nombre_Rol
+             console.log("Llega a solicitudes2")
              console.log(rol);
              if(rol==="Administrador DataCenter"){
                  mysqlConecction.query("SELECT * FROM versolicitudes where confirmacion='Pendiente' and edificio='Data Center' ORDER BY id_Solicitud ASC",(err,rows,fields)=>{
